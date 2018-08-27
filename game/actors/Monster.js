@@ -11,27 +11,24 @@ class Monster {
 	get type() { return 'monster'; }
 
 	static create(pos) {
-		return new Monster(pos.plus(new Vec(0, -1)), new Vec(2, 0))
+		return new Monster(pos.plus(new Vec(0, -1)), new Vec(4, 0))
 	}
 
 	update(time, state) {
-		let newPos = this.pos.plus(this.speed.times(time));
-		if (!state.level.touches(newPos, this.size, 'wall')) {
-			return new Monster(newPos, this.speed);
-		} else {
-			return new Monster(newPos, this.speed.times(-1));
-		}
+		let player = state.player;
+		let speed = this.speed.times(player.pos.x < this.pos.x ? -1 : 1);
+		let newPos = this.pos.plus(speed.times(time));
+		if (state.level.touches(newPos, this.size, 'wall')) return this;
+		else return new Monster(newPos, this.speed);
 	}
 
 	collide(state) {
-		let player = state.actors.find(a => a.type === 'player');
-		if (player.pos.y > this.pos.y) {
-			return new State(state.level, state.actors, 'lost');
+		let player = state.player;
+		if (player.pos.y - 0.5 + player.size.y < this.pos.y) {
+			let actors = state.actors.filter(a => a !== this);
+			return new State(state.level, actors, state.status);
 		} else {
-			let actors = state.actors;
-			let monster = actors.indexOf('monster');
-			actors.splice(monster, 1);
-			return new State(state.level, actors, 'playing');
+			return new State(state.level, state.actors, 'lost');
 		}
 	}
 
