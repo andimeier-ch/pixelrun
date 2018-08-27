@@ -62,12 +62,16 @@ function runLevel(level, Display) {
 
 
 async function runGame(plans, Display) {
-	for (let level = 0; level < plans.length;) {
+	let level = 0;
+	let lifes = 3;
+	while (level < plans.length && lifes > 0) {
+		console.log(lifes);
 		let status = await runLevel(new Level(plans[level]), Display);
 		if (status === 'won') level++;
+		else if (status === 'lost') lifes--;
 	}
-	console.log('Youve won!');
-	document.querySelector('#message').textContent = 'You\'ve won!';
+	if (lifes > 0) document.querySelector('#message').textContent = 'You\'ve won!';
+	else document.querySelector('#message').textContent = 'Game Over';
 }
 
 
