@@ -2,6 +2,7 @@ import Vec from './Vec.js';
 import Player from '../actors/Player.js';
 import Coin from '../actors/Coin.js';
 import Lava from '../actors/Lava.js';
+import Monster from "../actors/Monster.js";
 
 
 class Level {
@@ -54,7 +55,8 @@ const levelChars = {
 	'o': Coin,
 	'=': Lava,
 	'|': Lava,
-	'v': Lava
+	'v': Lava,
+	'M': Monster
 };
 
 

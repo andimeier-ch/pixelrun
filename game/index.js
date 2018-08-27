@@ -4,8 +4,6 @@ import Level from './core/Level.js';
 import State from './core/State.js';
 
 
-const GAME_LEVELS = levels.GAME_LEVELS;
-
 function trackKeys(keys) {
 	let down = Object.create(null);
 	function track(event) {
@@ -94,4 +92,4 @@ async function runGame(plans, Display) {
 }
 
 
-runGame(GAME_LEVELS, DOMDisplay);
+runGame(levels.MONSTER_LEVEL, DOMDisplay);
