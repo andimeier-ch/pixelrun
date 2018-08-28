@@ -1,5 +1,6 @@
 import * as levels from './core/levels.js';
 import DOMDisplay from './core/DOMDisplay.js'
+import CanvasDisplay from './core/CanvasDisplay.js'
 import Level from './core/Level.js';
 import State from './core/State.js';
 
@@ -92,4 +93,4 @@ async function runGame(plans, Display) {
 }
 
 
-runGame(levels.MONSTER_LEVEL, DOMDisplay);
+runGame(levels.GAME_LEVELS, CanvasDisplay);
